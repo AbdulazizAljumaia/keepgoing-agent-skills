@@ -1,0 +1,14 @@
+[project]
+name = "keepgoing-agent-skills"
+version = "1.0.0"
+description = "Provider-neutral keepgoing and keepfixing coding-agent skills"
+requires-python = ">=3.10"
+authors = [{ name = "Keepgoing contributors" }]
+keywords = ["ai-agents", "skills", "codex", "claude", "grok", "opencode"]
+
+[project.urls]
+Repository = "https://github.com/AbdulazizAljumaia/keepgoing-agent-skills"
+
+[tool.keepgoing]
+runtime = "skills/keepgoing/scripts/keepgoing.py"
+validation = "python scripts/validate.py"

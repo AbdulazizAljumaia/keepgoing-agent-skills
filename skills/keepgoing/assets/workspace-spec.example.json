@@ -1,0 +1,53 @@
+{
+  "project_name": "Example Notes API",
+  "scope": "Build a local notes API with persistent storage and documented verification; deployment is outside scope.",
+  "profile": "generic",
+  "timezone": "UTC",
+  "requirements": [
+    {
+      "title": "Create and retrieve notes",
+      "acceptance": "A verified request can create a note and retrieve the same stored content by its stable identifier."
+    },
+    {
+      "title": "Reject invalid note content",
+      "acceptance": "Empty or oversized content is rejected with a documented client error and no stored record."
+    }
+  ],
+  "plans": [
+    {
+      "title": "Implement the notes service",
+      "outcome": "Provide the storage and service behavior for valid and invalid notes.",
+      "scope": "Create only the named service and test files inside the generic API profile.",
+      "architecture": "A service owns validation and delegates persistence to a small repository boundary.",
+      "requirements": [1, 2],
+      "dependencies": [],
+      "tasks": [
+        {
+          "title": "Implement and verify note creation and retrieval",
+          "files": [
+            "Project/apps/api/src/notes.py",
+            "Project/apps/api/tests/test_notes.py"
+          ],
+          "steps": [
+            "Implement a repository-backed note service with stable identifiers and explicit validation failures.",
+            "Exercise valid creation/retrieval and invalid empty/oversized content in the named test file."
+          ],
+          "acceptance": [
+            "Valid content round-trips through the service.",
+            "Invalid content creates no stored record and returns a stable error."
+          ],
+          "verification": [
+            "Run the project test command recorded in the governed workspace and capture its exit code."
+          ],
+          "failure_behavior": [
+            "Leave the task incomplete with the failing assertion and next action when verification fails."
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": [
+    "Use only standard-library persistence for this example.",
+    "Do not put credentials or personal note contents in durable organizer records."
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Keepgoing"
+  short_description: "Durable planning and project continuation"
+  default_prompt: "Use $keepgoing to initialize or resume this project from durable plans and evidence."
+policy:
+  allow_implicit_invocation: true

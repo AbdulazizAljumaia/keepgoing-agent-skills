@@ -1,0 +1,6 @@
+interface:
+  display_name: "Keepfixing"
+  short_description: "Strict repairs without structural drift"
+  default_prompt: "Use $keepfixing to improve this completed governed task without adding or moving files."
+policy:
+  allow_implicit_invocation: true
