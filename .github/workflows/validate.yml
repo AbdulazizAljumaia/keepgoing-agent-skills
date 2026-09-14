@@ -5,8 +5,18 @@ on:
   pull_request:
 
 jobs:
-  test:
+  full-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python scripts/validate.py
+
+  portability-smoke:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ["3.10", "3.13"]
@@ -16,4 +26,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: python scripts/validate.py
+      - run: python -m compileall -q scripts skills tests demo
+      - run: >-
+          python -m unittest -v
+          tests.test_installer.InstallerTests.test_dry_run_does_not_create_home
+          tests.test_runtime.RuntimeBehaviorTests.test_05_framework_profiles_share_envelope_and_differ_inside
+          tests.test_runtime.RuntimeBehaviorTests.test_29_path_platform_and_symlink_boundaries
+          tests.test_runtime.RuntimeBehaviorTests.test_39_verified_move_falls_back_across_filesystems
