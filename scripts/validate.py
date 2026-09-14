@@ -107,17 +107,13 @@ def run() -> int:
     tests = subprocess.run(
         [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"],
         cwd=ROOT,
-        capture_output=True,
-        text=True,
         check=False,
     )
     checks.append({"name": "behavioral-tests", "passed": tests.returncode == 0})
     if tests.returncode:
-        issues.append("Behavioral tests failed:\n" + tests.stdout + tests.stderr)
+        issues.append("Behavioral tests failed; inspect the streamed unittest output above.")
     result = {"result": "success" if not issues else "failure", "checks": checks, "issues": issues}
     print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
-    if tests.stderr:
-        print(tests.stderr, file=sys.stderr)
     return 0 if not issues else 1
 
 
