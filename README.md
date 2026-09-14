@@ -2,6 +2,8 @@
 
 Provider-neutral coding-agent skills for durable project planning, execution records, fresh-context resumption, strict corrections, ratings, and recoverable project replacement.
 
+Start with the [guided installation and Notes API walkthrough](docs/getting-started.md), then use the [annotated workspace structure](docs/workspace-structure.md) to see how application code, plans, sessions, state, ratings, and replacement archives fit together.
+
 The repository contains two skills and one shared standard-library Python runtime:
 
 - `keepgoing` initializes, adopts, resumes, validates, checkpoints, and explicitly replaces governed projects.
@@ -38,6 +40,14 @@ python skills/keepgoing/scripts/keepgoing.py --help
 python skills/keepfixing/scripts/keepfixing.py --help
 ```
 
+Agent prompt examples:
+
+```text
+$keepgoing Initialize a governed notes API from the shipped example specification and resume TASK-001.
+$keepgoing Resume this project from its durable continuation without repeating completed work.
+$keepfixing Correct TASK-001 in its existing allowlisted files and preserve the original completion time.
+```
+
 Initialize from a complete specification:
 
 ```powershell
@@ -52,6 +62,10 @@ python scripts/validate.py
 ```
 
 The suite uses disposable workspaces for destructive and interruption scenarios. See `docs/acceptance.md` for the evidence map and `docs/capabilities.md` for honest host limitations.
+
+## How the folders work
+
+`Project/` contains the real application. The sibling `instructions/`, `plans/`, `sessions/`, and `rates/` directories record authority, unfinished work, evidence/handoffs, and ratings. `deprecated/` protects explicit replacement history. See the [full annotated example](docs/workspace-structure.md).
 
 ## Public-use note
 

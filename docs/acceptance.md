@@ -43,5 +43,6 @@ Run `python scripts/validate.py` from the repository root. Destructive and inter
 | Prepared ledger metadata and private recovery bundle | `test_37_prepared_ledger_is_checksum_metadata_not_raw_records` | Pass |
 | Replacement baseline tamper rejection | `test_38_replacement_recovery_rejects_tampered_archive` | Pass |
 | Cross-filesystem verified move fallback | `test_39_verified_move_falls_back_across_filesystems` | Pass |
+| Shipped Notes API specification and documented envelope | `test_43_shipped_example_spec_generates_documented_envelope` | Pass |
 
 Additional tests cover adoption preview/execution, lossless plan revisions, isolated installation, provider exposure, runtime dependency resolution, and dry-run non-mutation.

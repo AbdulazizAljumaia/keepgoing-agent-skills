@@ -798,6 +798,36 @@ class RuntimeBehaviorTests(unittest.TestCase):
         result = runtime.validate()
         self.assertTrue(any("schema" in issue.lower() for issue in result["issues"]))
 
+    def test_43_shipped_example_spec_generates_documented_envelope(self) -> None:
+        spec_path = REPO_ROOT / "skills" / "keepgoing" / "assets" / "workspace-spec.example.json"
+        spec = json.loads(spec_path.read_text(encoding="utf-8"))
+        root = self.base / "documented-notes-example"
+        runtime = Runtime(root)
+        result = runtime.initialize(spec, target=root)
+        self.assertEqual(result["result"], "success")
+        required = (
+            "Project/apps/api/src",
+            "Project/apps/api/tests",
+            "instructions/project.md",
+            "instructions/structure.md",
+            "instructions/state.json",
+            "instructions/ledger.jsonl",
+            "plans/plan_1.md",
+            "plans/plan_index.md",
+            "sessions/session_1.md",
+            "sessions/session_sum.md",
+            "rates/session_1_rate.md",
+            "rates/Sessions_rate.md",
+            "deprecated",
+        )
+        self.assertTrue(all((root / relative).exists() for relative in required))
+        for relative in spec["plans"][0]["tasks"][0]["files"]:
+            self.assertFalse((root / relative).exists())
+        structure = (root / "instructions" / "structure.md").read_text(encoding="utf-8")
+        self.assertIn("Project/apps/api/src/notes.py", structure)
+        self.assertIn("Project/apps/api/tests/test_notes.py", structure)
+        self.assertEqual(runtime.validate()["issues"], [])
+
 
 if __name__ == "__main__":
     unittest.main()

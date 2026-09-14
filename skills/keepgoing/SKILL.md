@@ -16,3 +16,5 @@ Use the shared deterministic runtime at `scripts/keepgoing.py`; records alone ne
 7. Finish only when actual project behavior, required checks, plan/session/state records, ratings, and validation agree. Otherwise save a precise continuation or blocker.
 
 Host hooks and automatic restart vary. Read [references/host-integration.md](references/host-integration.md) before claiming interception, exact context monitoring, or autonomous continuation.
+
+When preparing or explaining a governed layout, read [references/example-workspace.md](references/example-workspace.md) for an annotated concrete example and record ownership rules.
